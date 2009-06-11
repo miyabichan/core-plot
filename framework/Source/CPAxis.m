@@ -1,5 +1,4 @@
 
-
 #import "CPAxis.h"
 #import "CPPlotSpace.h"
 #import "CPUtilities.h"
@@ -7,6 +6,7 @@
 #import "CPLineStyle.h"
 #import "CPTextLayer.h"
 #import "CPAxisLabel.h"
+#import "CPPlatformSpecificCategories.h"
 
 @interface CPAxis ()
 
@@ -16,7 +16,6 @@
 -(NSDecimalNumber *)nextLocationFromCoordinateValue:(NSDecimalNumber *)coord increasing:(BOOL)increasing interval:(NSDecimalNumber *)interval;
 
 @end
-
 
 @implementation CPAxis
 
@@ -59,8 +58,10 @@
 		self.minorTicksPerInterval = 1;
 		self.coordinate = CPCoordinateX;
 		self.axisLabelingPolicy = CPAxisLabelingPolicyFixedInterval;
-		self.tickLabelFormatter = [[[NSNumberFormatter alloc] init] autorelease];
-		self.tickLabelFormatter.format = @"#0.0";
+		NSNumberFormatter *newFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+		newFormatter.maximumFractionDigits = 1; 
+        newFormatter.minimumFractionDigits = 1;
+        self.tickLabelFormatter = newFormatter;
 		self.axisLabels = [NSSet set];
         self.tickDirection = CPDirectionDown;
 		self.layerAutoresizingMask = kCPLayerNotSizable;
@@ -135,9 +136,9 @@
 #pragma mark -
 #pragma mark Labels
 
--(NSArray *)createAxisLabelsAtLocations:(NSArray *)locations
+-(NSArray *)newAxisLabelsAtLocations:(NSArray *)locations
 {
-    NSMutableArray *newLabels = [NSMutableArray arrayWithCapacity:locations.count];
+    NSMutableArray *newLabels = [[NSMutableArray alloc] initWithCapacity:locations.count];
 	for ( NSDecimalNumber *tickLocation in locations ) {
         NSString *labelString = [self.tickLabelFormatter stringForObjectValue:tickLocation];
         CPAxisLabel *newLabel = [[CPAxisLabel alloc] initWithText:labelString];
@@ -187,8 +188,9 @@
 	self.minorTickLocations = allNewMinorLocations;
 	
 	// Label ticks
-	NSArray *newLabels = [self createAxisLabelsAtLocations:self.majorTickLocations.allObjects];
+	NSArray *newLabels = [self newAxisLabelsAtLocations:self.majorTickLocations.allObjects];
 	self.axisLabels = [NSSet setWithArray:newLabels];
+    [newLabels release];
     
     [self setNeedsDisplay];
     [self setNeedsLayout];
