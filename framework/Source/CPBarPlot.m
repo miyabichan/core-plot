@@ -22,8 +22,11 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 @property (nonatomic, readwrite, copy) NSString *keyPathForBarLengthValues;
 @property (nonatomic, readwrite, copy) NSArray *barLengths;
 @property (nonatomic, readwrite, copy) NSArray *barLocations;
+@property (nonatomic, readwrite, retain) NSMutableArray *barLabelTextLayers;
 
 -(void)drawBarInContext:(CGContextRef)context fromBasePoint:(CGPoint *)basePoint toTipPoint:(CGPoint *)tipPoint recordIndex:(NSUInteger)index;
+
+-(void)addLabelLayers;
 
 @end
 /// @endcond
@@ -72,11 +75,6 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
  **/
 @synthesize baseValue;
 
-/** @property doublePrecisionBaseValue
- *	@brief The coordinate value of the fixed end of the bars, as a double.
- **/
-@synthesize doublePrecisionBaseValue;
-
 /** @property plotRange
  *	@brief Sets the plot range for the independent axis.
  *
@@ -94,6 +92,8 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
  *  @brief Sets the textstyle of the value label above the bar
  **/
 @synthesize barLabelTextStyle;
+
+@synthesize barLabelTextLayers;
 
 #pragma mark -
 #pragma mark Convenience Factory Methods
@@ -117,7 +117,6 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 	CPGradient *fillGradient = [CPGradient gradientWithBeginningColor:color endingColor:[CPColor blackColor]];
 	fillGradient.angle = (horizontal ? -90.0f : 0.0f);
 	barPlot.fill = [CPFill fillWithGradient:fillGradient];
-	barPlot.barLabelTextStyle = [CPTextStyle textStyle]; 
 	return [barPlot autorelease];
 }
 
@@ -135,12 +134,13 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 		barOffset = 0.0f;
 		cornerRadius = 0.0f;
 		baseValue = [[NSDecimalNumber zero] decimalValue];
-		doublePrecisionBaseValue = 0.0f;
 		barLengths = nil;
 		barsAreHorizontal = NO;
 		plotRange = nil;
 		barLabelOffset = 10.f;
-		
+		barLabelTextStyle = nil;
+        barLabelTextLayers = nil;
+        
 		self.needsDisplayOnBoundsChange = YES;
 	}
 	return self;
@@ -156,6 +156,9 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 	[fill release];
 	[barLengths release];
 	[plotRange release];
+    [barLabelTextLayers release];
+    [barLabelTextStyle release];
+    
 	[super dealloc];
 }
 
@@ -236,6 +239,15 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 }
 
 #pragma mark -
+#pragma mark Layout
+
+-(void)layoutSublayers 
+{
+    [super layoutSublayers];
+    [self addLabelLayers];
+}
+
+#pragma mark -
 #pragma mark Drawing
 
 -(void)renderAsVectorInContext:(CGContextRef)theContext
@@ -263,7 +275,7 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 			tipPoint = [self.plotSpace plotAreaViewPointForDoublePrecisionPlotPoint:plotPoint];
 			
 			// Base point
-			plotPoint[dependentCoord] = self.doublePrecisionBaseValue;
+			plotPoint[dependentCoord] = CPDecimalDoubleValue(self.baseValue);
 			basePoint = [self.plotSpace plotAreaViewPointForDoublePrecisionPlotPoint:plotPoint];
 		}
 		else {
@@ -365,33 +377,82 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 	CGContextRestoreGState(context);
 	
 	CGPathRelease(path);
-	
-	// Value label drawing
-	if ( [self.dataSource respondsToSelector:@selector(barLabelForBarPlot:recordIndex:)] ) {
-		CPTextLayer* label = [(id <CPBarPlotDataSource>)self.dataSource barLabelForBarPlot:self recordIndex:index];
-		if ( nil == label )
-			label = [[[CPTextLayer alloc] initWithText:[NSString stringWithFormat:@"%@", [self.barLengths objectAtIndex:index]] style:self.barLabelTextStyle] autorelease];
+}
 
-		if ( self.barsAreHorizontal ) {
-			if ( tipPoint->x < basePoint->x ) {
-				[label setAnchorPoint:CGPointMake(1, 0.5)];
-				[label setPosition:CGPointMake(tipPoint->x - self.barLabelOffset, tipPoint->y)];
-			} else {
-				[label setAnchorPoint:CGPointMake(0, 0.5)];
-				[label setPosition:CGPointMake(tipPoint->x + self.barLabelOffset, tipPoint->y)];
-			}
-		} else {
-			if ( tipPoint->y < basePoint->y ) {
-				[label setAnchorPoint:CGPointMake(0.5, 1)];
-				[label setPosition:CGPointMake(tipPoint->x, tipPoint->y - self.barLabelOffset)];
-			} else {
-				[label setAnchorPoint:CGPointMake(0.5, 0)];
-				[label setPosition:CGPointMake(tipPoint->x, tipPoint->y + self.barLabelOffset)];
-			}
-		}
-		
-		[self addSublayer:label];
-	}
+#pragma mark -
+#pragma mark Labels
+
+-(void)addLabelLayers
+{
+	// Remove existing labels
+    [self.barLabelTextLayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    
+    // Prepare to create new ones
+	self.barLabelTextLayers = [NSMutableArray array];
+    BOOL dataSourceSuppliesLabels = [self.dataSource respondsToSelector:@selector(barLabelForBarPlot:recordIndex:)];
+    if ( !dataSourceSuppliesLabels || barLabelTextStyle == nil ) return;
+    
+    // Iterate over bars
+    CPCoordinate independentCoord = ( self.barsAreHorizontal ? CPCoordinateY : CPCoordinateX );
+    CPCoordinate dependentCoord = ( self.barsAreHorizontal ? CPCoordinateX : CPCoordinateY );
+    NSArray *locations = self.barLocations;
+    NSArray *lengths = self.barLengths;
+    for (NSUInteger ii = 0; ii < [lengths count]; ii++) {
+        NSDecimal plotPoint[2];
+        CGPoint tipPoint;
+        plotPoint[independentCoord] = [[locations objectAtIndex:ii] decimalValue];
+        plotPoint[dependentCoord] = [[lengths objectAtIndex:ii] decimalValue];
+        tipPoint = [self.plotSpace plotAreaViewPointForPlotPoint:plotPoint];
+        
+        CGPoint basePoint;
+        plotPoint[independentCoord] = [[locations objectAtIndex:ii] decimalValue];
+        plotPoint[dependentCoord] = self.baseValue;
+        basePoint = [self.plotSpace plotAreaViewPointForPlotPoint:plotPoint];
+                
+        // Create label
+        CPTextLayer *label = nil;
+        if ( dataSourceSuppliesLabels ) {
+        	id <CPBarPlotDataSource> ds = (id)self.dataSource;
+            label = [ds barLabelForBarPlot:self recordIndex:ii];
+            if ( [label isKindOfClass:[NSNull class]] ) continue;
+        }
+        if ( !label ) {
+        	NSString *text = [[self.barLengths objectAtIndex:ii] description];
+            label = [[CPTextLayer alloc] initWithText:text style:self.barLabelTextStyle];
+            [label autorelease];
+        }
+        
+        // Position label
+        CGPoint newPosition;
+        if ( self.barsAreHorizontal ) {
+            if ( tipPoint.x < basePoint.x ) {
+                [label setAnchorPoint:CGPointMake(1, 0.5)];
+                newPosition = CGPointMake(tipPoint.x - self.barLabelOffset, tipPoint.y);
+            } else {
+                [label setAnchorPoint:CGPointMake(0, 0.5)];
+                newPosition = CGPointMake(tipPoint.x + self.barLabelOffset, tipPoint.y);
+            }
+        } else {
+            if ( tipPoint.y < basePoint.y ) {
+                [label setAnchorPoint:CGPointMake(0.5, 1)];
+                newPosition = CGPointMake(tipPoint.x, tipPoint.y - self.barLabelOffset);
+            } else {
+                [label setAnchorPoint:CGPointMake(0.5, 0)];
+                newPosition = CGPointMake(tipPoint.x, tipPoint.y + self.barLabelOffset);
+            }
+        }
+        
+        // Pixel align
+        CGSize labelSize = label.bounds.size;
+        CGPoint anchor = [label anchorPoint];
+        newPosition.x = round(newPosition.x) - round(labelSize.width * anchor.x) + (labelSize.width * anchor.x);
+		newPosition.y = round(newPosition.y) - round(labelSize.height * anchor.y) + (labelSize.height * anchor.y);
+        [label setPosition:newPosition];
+    
+    	// Add to layer tree
+        [barLabelTextLayers addObject:label];
+        [self addSublayer:label];
+    }
 }
 
 #pragma mark -
@@ -445,6 +506,7 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
     if (barOffset != newBarOffset) {
         barOffset = newBarOffset;
         [self setNeedsDisplay];
+        [self setNeedsLayout];
     }
 }
 
@@ -458,24 +520,37 @@ static NSString * const CPBarLengthsBindingContext = @"CPBarLengthsBindingContex
 
 -(void)setBaseValue:(NSDecimal)newBaseValue 
 {
-	if ( !CPDecimalEquals(baseValue, newBaseValue) ) {
+	if ( !CPDecimalEquals(baseValue, newBaseValue) ) 
+    {
 		baseValue = newBaseValue;
 		[self setNeedsDisplay];
+        [self setNeedsLayout];
 	}
 }
 
--(void)setDoublePrecisionBaseValue:(double)newDoublePrecisionBaseValue {
-	if (doublePrecisionBaseValue != newDoublePrecisionBaseValue) {
-		doublePrecisionBaseValue = newDoublePrecisionBaseValue;
-		[self setNeedsDisplay];
-	}
-}
-
--(void)setBarsAreHorizontal:(BOOL)newBarsAreHorizontal {
+-(void)setBarsAreHorizontal:(BOOL)newBarsAreHorizontal 
+{
 	if (barsAreHorizontal != newBarsAreHorizontal) {
 		barsAreHorizontal = newBarsAreHorizontal;
 		[self setNeedsDisplay];
+        [self setNeedsLayout];
 	}
+}
+
+-(void)setBarLabelOffset:(CGFloat)newOffset 
+{
+    if ( barLabelOffset != newOffset ) {
+        barLabelOffset = newOffset;
+        [self setNeedsLayout];
+    }
+}
+
+-(void)setBarLabelTextStyle:(CPTextStyle *)newStyle 
+{
+    if ( barLabelTextStyle != newStyle ) {
+        barLabelTextStyle = [newStyle copy];
+        [self setNeedsLayout];
+    }
 }
 
 #pragma mark -

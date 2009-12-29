@@ -41,13 +41,15 @@ typedef enum _CPBarPlotField {
  *	@param barPlot The bar plot.
  *	@param index The data index of interest.
  *	@return The bar label for the point with the given index.
+ *  If you return nil, the default bar label will be used. If you return an NSNull,
+ *  no label will be shown for the index in question.
  **/
 -(CPTextLayer *)barLabelForBarPlot:(CPBarPlot *)barPlot recordIndex:(NSUInteger)index;
 
 @end 
 
 @interface CPBarPlot : CPPlot {
-@private
+	@private
     id observedObjectForBarLengthValues;
     NSString *keyPathForBarLengthValues;
     CPLineStyle *lineStyle;
@@ -55,13 +57,13 @@ typedef enum _CPBarPlotField {
     CGFloat barWidth;
     CGFloat barOffset;
     CGFloat cornerRadius;
-    NSDecimal baseValue;	// TODO: NSDecimal instance variables in CALayers cause an unhandled property type encoding error
-	double doublePrecisionBaseValue;
+    NSDecimal baseValue;	
     NSArray *barLengths;
     BOOL barsAreHorizontal;
     CPPlotRange *plotRange;
 	CGFloat barLabelOffset;
 	CPTextStyle *barLabelTextStyle;
+    NSMutableArray *barLabelTextLayers;
 } 
 
 @property (nonatomic, readwrite, assign) CGFloat barWidth;
@@ -71,10 +73,9 @@ typedef enum _CPBarPlotField {
 @property (nonatomic, readwrite, copy) CPFill *fill;
 @property (nonatomic, readwrite, assign) BOOL barsAreHorizontal;
 @property (nonatomic, readwrite) NSDecimal baseValue;
-@property (nonatomic, readwrite) double doublePrecisionBaseValue;
 @property (nonatomic, readwrite, copy) CPPlotRange *plotRange;
 @property (nonatomic, readwrite, assign) CGFloat barLabelOffset;
-@property (nonatomic, readwrite, retain) CPTextStyle *barLabelTextStyle;
+@property (nonatomic, readwrite, copy) CPTextStyle *barLabelTextStyle;
 
 /// @name Factory Methods
 /// @{
