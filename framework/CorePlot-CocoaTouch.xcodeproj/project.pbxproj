@@ -18,6 +18,19 @@
 			name = "Build SDK";
 			productName = "Build SDK";
 		};
+		8869C4B9136E5AD200A92631 /* Build CorePlot-iOSCombined */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8869C4BA136E5AD200A92631 /* Build configuration list for PBXAggregateTarget "Build CorePlot-iOSCombined" */;
+			buildPhases = (
+				8869C4BE136E5B1200A92631 /* Build Simulator and Device libs */,
+				8869C4BF136E5B3300A92631 /* Build Universal lib */,
+				8869C4C0136E5B8F00A92631 /* Copy Headers */,
+			);
+			dependencies = (
+			);
+			name = "Build CorePlot-iOSCombined";
+			productName = Build;
+		};
 		C3566B8010EED04900FB3866 /* Documentation */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = C3566B8410EED06800FB3866 /* Build configuration list for PBXAggregateTarget "Documentation" */;
@@ -85,6 +98,74 @@
 		07B69B7212B62E9600F4C16C /* CPMutableLineStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B69B7012B62E9600F4C16C /* CPMutableLineStyle.m */; };
 		07FCF2D3115B54DE00E46606 /* CPSlateTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 07FCF2D1115B54DE00E46606 /* CPSlateTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07FCF2D4115B54DE00E46606 /* CPSlateTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCF2D2115B54DE00E46606 /* CPSlateTheme.m */; };
+		8869C54D136E5DAD00A92631 /* CPNumericDataType.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3CADE3911B188B600D36017 /* CPNumericDataType.h */; };
+		8869C54E136E5DAD00A92631 /* CPNumericData.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3CADE3011B188A800D36017 /* CPNumericData.h */; };
+		8869C54F136E5DAD00A92631 /* CPMutableNumericData.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3CADE3D11B188C500D36017 /* CPMutableNumericData.h */; };
+		8869C550136E5DAD00A92631 /* CPNumericData+TypeConversion.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3CADE3211B188A800D36017 /* CPNumericData+TypeConversion.h */; };
+		8869C551136E5DAD00A92631 /* CPMutableNumericData+TypeConversion.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3CAFB391229E48200F5C989 /* CPMutableNumericData+TypeConversion.h */; };
+		8869C552136E5DAD00A92631 /* CPDefinitions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82A30FB89E610035D8DA /* CPDefinitions.h */; };
+		8869C553136E5DAD00A92631 /* CPExceptions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82A50FB89E610035D8DA /* CPExceptions.h */; };
+		8869C554136E5DAD00A92631 /* CPUtilities.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82A70FB89E610035D8DA /* CPUtilities.h */; };
+		8869C555136E5DAD00A92631 /* CPPlotRange.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82AB0FB89E610035D8DA /* CPPlotRange.h */; };
+		8869C556136E5DAD00A92631 /* CPLayer.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B826F0FB89E610035D8DA /* CPLayer.h */; };
+		8869C557136E5DAD00A92631 /* CPBorderedLayer.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 077F28510FE18048000BCA52 /* CPBorderedLayer.h */; };
+		8869C558136E5DAD00A92631 /* CPResponder.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07AEF30110BBF99A0012BEFF /* CPResponder.h */; };
+		8869C559136E5DAD00A92631 /* CPAnnotation.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0718DE4511D1EDBA00AF4851 /* CPAnnotation.h */; };
+		8869C55A136E5DAD00A92631 /* CPAnnotationHostLayer.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0718DE4711D1EDBA00AF4851 /* CPAnnotationHostLayer.h */; };
+		8869C55B136E5DAD00A92631 /* CPLayerAnnotation.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0718DE4911D1EDBA00AF4851 /* CPLayerAnnotation.h */; };
+		8869C55C136E5DAD00A92631 /* CPPlotSpaceAnnotation.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0718DE4B11D1EDBA00AF4851 /* CPPlotSpaceAnnotation.h */; };
+		8869C55D136E5DAD00A92631 /* CPConstrainedPosition.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 074FADF7112024C500394B90 /* CPConstrainedPosition.h */; };
+		8869C55E136E5DAD00A92631 /* CPLayoutManager.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C3B623BB107EC7ED0009EF0B /* CPLayoutManager.h */; };
+		8869C560136E5DAD00A92631 /* CPTextStyle.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07A62FB30FE2234900CD765C /* CPTextStyle.h */; };
+		8869C561136E5DAD00A92631 /* CPMutableTextStyle.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07B69AB712B6281100F4C16C /* CPMutableTextStyle.h */; };
+		8869C563136E5DAD00A92631 /* CPColor.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 070CB8300FC9DEA800F3152B /* CPColor.h */; };
+		8869C564136E5DAD00A92631 /* CPColorSpace.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 070CB8320FC9DEA800F3152B /* CPColorSpace.h */; };
+		8869C565136E5DAD00A92631 /* CPGradient.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82980FB89E610035D8DA /* CPGradient.h */; };
+		8869C566136E5DAD00A92631 /* CPImage.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B829A0FB89E610035D8DA /* CPImage.h */; };
+		8869C567136E5DAD00A92631 /* CPLineStyle.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B829C0FB89E610035D8DA /* CPLineStyle.h */; };
+		8869C568136E5DAD00A92631 /* CPMutableLineStyle.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07B69B6F12B62E9600F4C16C /* CPMutableLineStyle.h */; };
+		8869C569136E5DAD00A92631 /* CPPathExtensions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 077F28530FE18048000BCA52 /* CPPathExtensions.h */; };
+		8869C56A136E5DAD00A92631 /* CPFill.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82880FB89E610035D8DA /* CPFill.h */; };
+		8869C56E136E5DAD00A92631 /* CPTimeFormatter.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07A2E71C102DFAD300809BC5 /* CPTimeFormatter.h */; };
+		8869C56F136E5DAD00A92631 /* CPGraph.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82B60FB89E610035D8DA /* CPGraph.h */; };
+		8869C570136E5DAD00A92631 /* CPXYGraph.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82B80FB89E610035D8DA /* CPXYGraph.h */; };
+		8869C571136E5DAD00A92631 /* CPPlotAreaFrame.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82C10FB89E610035D8DA /* CPPlotAreaFrame.h */; };
+		8869C572136E5DAD00A92631 /* CPPlotArea.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65A311025EDF00FE24BB /* CPPlotArea.h */; };
+		8869C573136E5DAD00A92631 /* CPLimitBand.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C318F4BF11EA18A400595FF9 /* CPLimitBand.h */; };
+		8869C574136E5DAD00A92631 /* CPPlotSpace.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82C60FB89E610035D8DA /* CPPlotSpace.h */; };
+		8869C575136E5DAD00A92631 /* CPXYPlotSpace.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 074D7BC30FD6B65E006011BC /* CPXYPlotSpace.h */; };
+		8869C576136E5DAD00A92631 /* CPPolarPlotSpace.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82CC0FB89E610035D8DA /* CPPolarPlotSpace.h */; };
+		8869C577136E5DAD00A92631 /* CPRangePlot.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = D0C047BE12D6568500DA8047 /* CPRangePlot.h */; };
+		8869C578136E5DAD00A92631 /* CPPlotGroup.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C30C85A91047428100181766 /* CPPlotGroup.h */; };
+		8869C579136E5DAD00A92631 /* CPPlot.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82D20FB89E610035D8DA /* CPPlot.h */; };
+		8869C57A136E5DAD00A92631 /* CPScatterPlot.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82D40FB89E610035D8DA /* CPScatterPlot.h */; };
+		8869C57B136E5DAD00A92631 /* CPBarPlot.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82DA0FB89E610035D8DA /* CPBarPlot.h */; };
+		8869C57C136E5DAD00A92631 /* CPTradingRangePlot.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0772B4F110E26A12009CD04C /* CPTradingRangePlot.h */; };
+		8869C57D136E5DAD00A92631 /* CPPieChart.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC74A2C010FC087800E7E90D /* CPPieChart.h */; };
+		8869C57E136E5DAD00A92631 /* CPPlotSymbol.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82D00FB89E610035D8DA /* CPPlotSymbol.h */; };
+		8869C57F136E5DAD00A92631 /* CPAxis.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 070CB8390FC9DED400F3152B /* CPAxis.h */; };
+		8869C580136E5DAD00A92631 /* CPAxisSet.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 070CB83D0FC9DED400F3152B /* CPAxisSet.h */; };
+		8869C581136E5DAD00A92631 /* CPGridLines.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65B111025F8A00FE24BB /* CPGridLines.h */; };
+		8869C583136E5DAD00A92631 /* CPAxisLabel.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65B511025FA900FE24BB /* CPAxisLabel.h */; };
+		8869C584136E5DAD00A92631 /* CPAxisTitle.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65B711025FA900FE24BB /* CPAxisTitle.h */; };
+		8869C585136E5DAD00A92631 /* CPAxisLabelGroup.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65BD11025FB300FE24BB /* CPAxisLabelGroup.h */; };
+		8869C586136E5DAD00A92631 /* CPXYAxis.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65C111025FCC00FE24BB /* CPXYAxis.h */; };
+		8869C587136E5DAE00A92631 /* CPXYAxisSet.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C35A65C311025FCC00FE24BB /* CPXYAxisSet.h */; };
+		8869C588136E5DAE00A92631 /* CPTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 072E3F9B0FE2FF7300ACF62F /* CPTheme.h */; };
+		8869C589136E5DAE00A92631 /* CPXYTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = C40CFB92107EC1B40057E828 /* CPXYTheme.h */; };
+		8869C58A136E5DAE00A92631 /* CPDarkGradientTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 072E3F990FE2FF7300ACF62F /* CPDarkGradientTheme.h */; };
+		8869C58B136E5DAE00A92631 /* CPPlainBlackTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BCC7EA3F1006BF5700B39451 /* CPPlainBlackTheme.h */; };
+		8869C58C136E5DAE00A92631 /* CPPlainWhiteTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BCC7EA411006BF5700B39451 /* CPPlainWhiteTheme.h */; };
+		8869C58D136E5DAE00A92631 /* CPStocksTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BCC7EA431006BF5700B39451 /* CPStocksTheme.h */; };
+		8869C58F136E5DAE00A92631 /* CPSlateTheme.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 07FCF2D1115B54DE00E46606 /* CPSlateTheme.h */; };
+		8869C590136E5DAE00A92631 /* CPPlatformSpecificDefines.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0789EFBA0FB9F97F00C0A613 /* CPPlatformSpecificDefines.h */; };
+		8869C591136E5DAE00A92631 /* CPPlatformSpecificCategories.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0789EFB80FB9F97F00C0A613 /* CPPlatformSpecificCategories.h */; };
+		8869C592136E5DAE00A92631 /* CPPlatformSpecificFunctions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = 0789EFBC0FB9F97F00C0A613 /* CPPlatformSpecificFunctions.h */; };
+		8869C593136E5DAE00A92631 /* CPGraphHostingView.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC79F1D30FD1DC1A00510976 /* CPGraphHostingView.h */; };
+		8869C594136E5DAE00A92631 /* CorePlot-CocoaTouch.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B83C20FB8AC4B0035D8DA /* CorePlot-CocoaTouch.h */; };
+		8869C595136E5DDE00A92631 /* NSDecimalNumberExtensions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82B10FB89E610035D8DA /* NSDecimalNumberExtensions.h */; };
+		8869C596136E5DDE00A92631 /* NSNumberExtensions.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B82B30FB89E610035D8DA /* NSNumberExtensions.h */; };
+		8869C598136E63A400A92631 /* CPTextLayer.h in Copy Headers */ = {isa = PBXBuildFile; fileRef = BC9B829E0FB89E610035D8DA /* CPTextLayer.h */; };
 		BC4FAF29100D7DF300811DD3 /* NSDecimalNumberExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9B82B10FB89E610035D8DA /* NSDecimalNumberExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC74A2C210FC087800E7E90D /* CPPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = BC74A2C010FC087800E7E90D /* CPPieChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BC74A2C310FC087800E7E90D /* CPPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = BC74A2C110FC087800E7E90D /* CPPieChart.m */; };
@@ -183,6 +264,87 @@
 		D0C047BF12D6568500DA8047 /* CPRangePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C047BD12D6568500DA8047 /* CPRangePlot.m */; };
 		D0C047C012D6568500DA8047 /* CPRangePlot.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C047BE12D6568500DA8047 /* CPRangePlot.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8869C4C0136E5B8F00A92631 /* Copy Headers */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/Headers/CorePlot";
+			dstSubfolderSpec = 0;
+			files = (
+				8869C595136E5DDE00A92631 /* NSDecimalNumberExtensions.h in Copy Headers */,
+				8869C596136E5DDE00A92631 /* NSNumberExtensions.h in Copy Headers */,
+				8869C54D136E5DAD00A92631 /* CPNumericDataType.h in Copy Headers */,
+				8869C54E136E5DAD00A92631 /* CPNumericData.h in Copy Headers */,
+				8869C54F136E5DAD00A92631 /* CPMutableNumericData.h in Copy Headers */,
+				8869C550136E5DAD00A92631 /* CPNumericData+TypeConversion.h in Copy Headers */,
+				8869C551136E5DAD00A92631 /* CPMutableNumericData+TypeConversion.h in Copy Headers */,
+				8869C552136E5DAD00A92631 /* CPDefinitions.h in Copy Headers */,
+				8869C553136E5DAD00A92631 /* CPExceptions.h in Copy Headers */,
+				8869C554136E5DAD00A92631 /* CPUtilities.h in Copy Headers */,
+				8869C555136E5DAD00A92631 /* CPPlotRange.h in Copy Headers */,
+				8869C556136E5DAD00A92631 /* CPLayer.h in Copy Headers */,
+				8869C557136E5DAD00A92631 /* CPBorderedLayer.h in Copy Headers */,
+				8869C558136E5DAD00A92631 /* CPResponder.h in Copy Headers */,
+				8869C559136E5DAD00A92631 /* CPAnnotation.h in Copy Headers */,
+				8869C55A136E5DAD00A92631 /* CPAnnotationHostLayer.h in Copy Headers */,
+				8869C55B136E5DAD00A92631 /* CPLayerAnnotation.h in Copy Headers */,
+				8869C55C136E5DAD00A92631 /* CPPlotSpaceAnnotation.h in Copy Headers */,
+				8869C55D136E5DAD00A92631 /* CPConstrainedPosition.h in Copy Headers */,
+				8869C55E136E5DAD00A92631 /* CPLayoutManager.h in Copy Headers */,
+				8869C560136E5DAD00A92631 /* CPTextStyle.h in Copy Headers */,
+				8869C561136E5DAD00A92631 /* CPMutableTextStyle.h in Copy Headers */,
+				8869C563136E5DAD00A92631 /* CPColor.h in Copy Headers */,
+				8869C564136E5DAD00A92631 /* CPColorSpace.h in Copy Headers */,
+				8869C565136E5DAD00A92631 /* CPGradient.h in Copy Headers */,
+				8869C566136E5DAD00A92631 /* CPImage.h in Copy Headers */,
+				8869C567136E5DAD00A92631 /* CPLineStyle.h in Copy Headers */,
+				8869C568136E5DAD00A92631 /* CPMutableLineStyle.h in Copy Headers */,
+				8869C569136E5DAD00A92631 /* CPPathExtensions.h in Copy Headers */,
+				8869C56A136E5DAD00A92631 /* CPFill.h in Copy Headers */,
+				8869C56E136E5DAD00A92631 /* CPTimeFormatter.h in Copy Headers */,
+				8869C598136E63A400A92631 /* CPTextLayer.h in Copy Headers */,
+				8869C56F136E5DAD00A92631 /* CPGraph.h in Copy Headers */,
+				8869C570136E5DAD00A92631 /* CPXYGraph.h in Copy Headers */,
+				8869C571136E5DAD00A92631 /* CPPlotAreaFrame.h in Copy Headers */,
+				8869C572136E5DAD00A92631 /* CPPlotArea.h in Copy Headers */,
+				8869C573136E5DAD00A92631 /* CPLimitBand.h in Copy Headers */,
+				8869C574136E5DAD00A92631 /* CPPlotSpace.h in Copy Headers */,
+				8869C575136E5DAD00A92631 /* CPXYPlotSpace.h in Copy Headers */,
+				8869C576136E5DAD00A92631 /* CPPolarPlotSpace.h in Copy Headers */,
+				8869C577136E5DAD00A92631 /* CPRangePlot.h in Copy Headers */,
+				8869C578136E5DAD00A92631 /* CPPlotGroup.h in Copy Headers */,
+				8869C579136E5DAD00A92631 /* CPPlot.h in Copy Headers */,
+				8869C57A136E5DAD00A92631 /* CPScatterPlot.h in Copy Headers */,
+				8869C57B136E5DAD00A92631 /* CPBarPlot.h in Copy Headers */,
+				8869C57C136E5DAD00A92631 /* CPTradingRangePlot.h in Copy Headers */,
+				8869C57D136E5DAD00A92631 /* CPPieChart.h in Copy Headers */,
+				8869C57E136E5DAD00A92631 /* CPPlotSymbol.h in Copy Headers */,
+				8869C57F136E5DAD00A92631 /* CPAxis.h in Copy Headers */,
+				8869C580136E5DAD00A92631 /* CPAxisSet.h in Copy Headers */,
+				8869C581136E5DAD00A92631 /* CPGridLines.h in Copy Headers */,
+				8869C583136E5DAD00A92631 /* CPAxisLabel.h in Copy Headers */,
+				8869C584136E5DAD00A92631 /* CPAxisTitle.h in Copy Headers */,
+				8869C585136E5DAD00A92631 /* CPAxisLabelGroup.h in Copy Headers */,
+				8869C586136E5DAD00A92631 /* CPXYAxis.h in Copy Headers */,
+				8869C587136E5DAE00A92631 /* CPXYAxisSet.h in Copy Headers */,
+				8869C588136E5DAE00A92631 /* CPTheme.h in Copy Headers */,
+				8869C589136E5DAE00A92631 /* CPXYTheme.h in Copy Headers */,
+				8869C58A136E5DAE00A92631 /* CPDarkGradientTheme.h in Copy Headers */,
+				8869C58B136E5DAE00A92631 /* CPPlainBlackTheme.h in Copy Headers */,
+				8869C58C136E5DAE00A92631 /* CPPlainWhiteTheme.h in Copy Headers */,
+				8869C58D136E5DAE00A92631 /* CPStocksTheme.h in Copy Headers */,
+				8869C58F136E5DAE00A92631 /* CPSlateTheme.h in Copy Headers */,
+				8869C590136E5DAE00A92631 /* CPPlatformSpecificDefines.h in Copy Headers */,
+				8869C591136E5DAE00A92631 /* CPPlatformSpecificCategories.h in Copy Headers */,
+				8869C592136E5DAE00A92631 /* CPPlatformSpecificFunctions.h in Copy Headers */,
+				8869C593136E5DAE00A92631 /* CPGraphHostingView.h in Copy Headers */,
+				8869C594136E5DAE00A92631 /* CorePlot-CocoaTouch.h in Copy Headers */,
+			);
+			name = "Copy Headers";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		070CB8300FC9DEA800F3152B /* CPColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPColor.h; path = Source/CPColor.h; sourceTree = "<group>"; };
@@ -894,6 +1056,7 @@
 				BC9B83460FB8A0A40035D8DA /* CorePlot-CocoaTouch */,
 				C3566B8010EED04900FB3866 /* Documentation */,
 				0760D0F311BD272D00A3C4BD /* Build SDK */,
+				8869C4B9136E5AD200A92631 /* Build CorePlot-iOSCombined */,
 			);
 		};
 /* End PBXProject section */
@@ -911,6 +1074,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd \"${SRCROOT}/SDKBuild\"\n./build.sh\nmv CorePlot.zip ~/Desktop";
+		};
+		8869C4BE136E5B1200A92631 /* Build Simulator and Device libs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Simulator and Device libs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator4.3 -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build\nxcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos4.3 -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build\nexit 0";
+		};
+		8869C4BF136E5B3300A92631 /* Build Universal lib */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Universal lib";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# set environment\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/lib${PROJECT_NAME}.a\" &&\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/lib${PROJECT_NAME}.a\" &&\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\" &&\nUNIVERSAL_LIBRARY_PATH=\"${UNIVERSAL_LIBRARY_DIR}/lib${PROJECT_NAME}.a\" &&\nLIBRARY_DIR=CorePlot\n\n# Create framework directory structure.\n\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers\" &&\nmkdir -p \"${UNIVERSAL_LIBRARY_DIR}/Headers/${LIBRARY_DIR}\" &&\n\n# Generate universal binary from desktop, device, and simulator builds.\nlipo \"${SIMULATOR_LIBRARY_PATH}\" \"${DEVICE_LIBRARY_PATH}\" -create -output \"${UNIVERSAL_LIBRARY_PATH}\"";
 		};
 		C3566B7F10EED04900FB3866 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1031,6 +1222,20 @@
 			};
 			name = Release;
 		};
+		8869C4BB136E5AD200A92631 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8869C4BC136E5AD200A92631 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		BC9B83480FB8A0A50035D8DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1038,6 +1243,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-lstdc++",
 					"-falign-loops=16",
@@ -1049,6 +1255,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "CorePlot-CocoaTouch";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers/CorePlot;
 				SYMROOT = "$(PROJECT_DIR)/../build";
 			};
 			name = Debug;
@@ -1071,6 +1278,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = "CorePlot-CocoaTouch";
+				PUBLIC_HEADERS_FOLDER_PATH = Headers/CorePlot;
 				SYMROOT = "$(PROJECT_DIR)/../build";
 				ZERO_LINK = NO;
 			};
@@ -1173,6 +1381,15 @@
 			buildConfigurations = (
 				0760D0F411BD272E00A3C4BD /* Debug */,
 				0760D0F511BD272E00A3C4BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8869C4BA136E5AD200A92631 /* Build configuration list for PBXAggregateTarget "Build CorePlot-iOSCombined" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8869C4BB136E5AD200A92631 /* Debug */,
+				8869C4BC136E5AD200A92631 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# For Xcode
+
+cat <<EOF > .gitignore
+# xcode noise
+build/*
+build
+*xcodeproj/*mode*
+*xcodeproj/*pbxuser
+*xcodeproj/*per*
+*xcodeproj/project.xcworkspace
+*xcodeproj/xcuserdata
+**/build
+**/*xcodeproj/*mode*
+**/*xcodeproj/*pbxuser
+**/*xcodeproj/*per*
+**/*xcodeproj/project.xcworkspace
+**/*xcodeproj/xcuserdata
+**/**/*xcodeproj/*mode*
+**/**/*xcodeproj/*pbxuser
+**/**/*xcodeproj/*per*
+**/**/*xcodeproj/project.xcworkspace
+**/**/*xcodeproj/xcuserdata
+
+# old skool
+.svn
+
+# osx noise
+.DS_Store
+*.swp
+*~.nib
+profile
+EOF
+
+cat <<EOF > .gitattributes
+*.pbxproj -crlf -diff -merge
+EOF
+
